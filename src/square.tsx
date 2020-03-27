@@ -2,13 +2,14 @@ import React from "react";
 
 interface SquareProps {
   value: string;
-  onClick: any;
+  handleClick: (i: number) => void;
+  number: number;
 }
 
 const Square: React.FC<SquareProps> = (props: SquareProps) => {
   console.log(props.value);
   return (
-    <button className="square" onClick={() => props.onClick()}>
+    <button className="square" onClick={() => props.handleClick(props.number)}>
       {props.value}
     </button>
   );

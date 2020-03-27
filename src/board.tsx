@@ -1,8 +1,12 @@
 import React from "react";
 import Square from "./square";
 
+export interface Step {
+  squares: string[];
+}
+
 interface BoardProps {
-  history: { squares: string[] }[];
+  history: Step[];
   squares: string[];
   handleClick: (i: number) => void;
   xIsNext: boolean;
@@ -11,7 +15,11 @@ interface BoardProps {
 const Board: React.FC<BoardProps> = (props: BoardProps) => {
   const renderSquare = (i: number) => {
     return (
-      <Square value={props.squares[i]} onClick={() => props.handleClick(i)} />
+      <Square
+        number={i}
+        value={props.squares[i]}
+        handleClick={props.handleClick}
+      />
     );
   };
 

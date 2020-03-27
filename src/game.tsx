@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import Board from "./board";
-
-interface Step {
-  squares: string[];
-}
+import Board, { Step } from "./board";
 
 const Game: React.FC = () => {
   const [history, setHistory] = useState<Step[]>([
@@ -36,7 +32,6 @@ const Game: React.FC = () => {
     setStepNumber(stepNumber);
     setXIsNext(stepNumber % 2 === 0);
   };
-
   const newHistory = history;
   const current = newHistory[stepNumber];
   const winner = calculateWinner(current.squares);
@@ -52,7 +47,7 @@ const Game: React.FC = () => {
       <div className="game-board">
         <Board
           squares={current.squares}
-          handleClick={(i: number) => handleClick(i)}
+          handleClick={handleClick}
           history={history}
           xIsNext={xIsNext}
         />
