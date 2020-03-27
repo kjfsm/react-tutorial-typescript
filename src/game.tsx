@@ -22,13 +22,13 @@ const Game: React.FC = () => {
     }
     squares[i] = xIsNext ? "X" : "O";
     setHistory(
-      history.concat([
+      newHistory.concat([
         {
           squares: squares
         }
       ])
     );
-    setStepNumber(history.length);
+    setStepNumber(newHistory.length);
     setXIsNext(!xIsNext);
   };
 
@@ -40,15 +40,6 @@ const Game: React.FC = () => {
   const newHistory = history;
   const current = newHistory[stepNumber];
   const winner = calculateWinner(current.squares);
-  
-  const moves = history.map((_, move) => {
-    const desc = move ? "Go to #" + move : "Goto game start";
-    return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{desc}</button>
-      </li>
-    );
-  });
 
   let status: string;
   if (winner) {
@@ -68,7 +59,16 @@ const Game: React.FC = () => {
       </div>
       <div className="game-info">
         <div>{status}</div>
-        <ol>{moves}</ol>
+        <ol>
+          {history.map((_, move) => {
+            const desc = move ? "Go to #" + move : "Goto game start";
+            return (
+              <li key={move}>
+                <button onClick={() => jumpTo(move)}>{desc}</button>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </div>
   );
